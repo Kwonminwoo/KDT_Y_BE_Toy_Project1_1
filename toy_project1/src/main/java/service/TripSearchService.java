@@ -1,7 +1,6 @@
 package service;
 
-import util.Exeption.InvalidFormatOptionException;
-import util.Verifier;
+import exeption.InvalidFormatOptionException;
 
 public class TripSearchService {
     private String fileFormat;
@@ -22,7 +21,7 @@ public class TripSearchService {
             case 2:
                 return ".csv";
             default:
-                throw new InvalidFormatOptionException(fileFormatOptionNumber);
+                return "";
         }
     }
 

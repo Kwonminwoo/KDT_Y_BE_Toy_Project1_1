@@ -1,7 +1,7 @@
 package controller;
 
 import service.TripSearchService;
-import util.Exeption.InvalidFormatOptionException;
+import exeption.InvalidFormatOptionException;
 import util.Verifier;
 
 public class TripSearchController {

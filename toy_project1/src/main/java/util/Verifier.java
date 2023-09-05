@@ -1,6 +1,6 @@
 package util;
 
-import util.Exeption.InvalidFormatOptionException;
+import exeption.InvalidFormatOptionException;
 
 public class Verifier extends Exception {
     public static void validateFileFormatOptionNumber(int formatOption) throws InvalidFormatOptionException {

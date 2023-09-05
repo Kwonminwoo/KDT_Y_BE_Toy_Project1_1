@@ -1,4 +1,4 @@
-package util.Exeption;
+package exeption;
 
 public class InvalidFormatOptionException extends Exception {
     public InvalidFormatOptionException(int fileFormatOptionNumber) {
