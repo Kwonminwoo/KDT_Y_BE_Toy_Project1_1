@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Trip;
 import service.TripSearchService;
 import exeption.InvalidFormatOptionException;
 import util.Verifier;
@@ -14,21 +15,26 @@ public class TripSearchController {
     // 내부에서, Itineraries 객체로 묶기
     // back to Main: return
     // --------------------------------
+
+    // main 반복문이므로 singleton
+    private static TripSearchController instance;
+
     private TripSearchController() {
     }
 
-    static TripSearchService tripSearchService = new TripSearchService();
+    public static synchronized TripSearchController getInstance() {
+        if (instance == null)
+            instance = new TripSearchController();
+        return instance;
+    }
 
-    public static void launch() { // return: Trip
+    private TripSearchService tripSearchService = new TripSearchService();
+
+    public void launch() { // return: Trip
         // view 호출 메서드 실행:
         // view는 사용자로부터 값을 받고, TripSearchController에게 전달할 의무가 있음
         // int formatOption = view.getFormatOptionFromUser();
-        int fileFormatOptionNumber = 3;
-        try {
-            Verifier.validateFileFormatOptionNumber(fileFormatOptionNumber); // 올바른 값을 입력했는지 검사할 의무
-            tripSearchService.setFileFormat(fileFormatOptionNumber);
-        } catch (InvalidFormatOptionException e) {
-            e.printStackTrace();
-        }
+        int fileFormatOptionNumber = 2;
+        tripSearchService.setFileFormat(fileFormatOptionNumber);
     }
 }
