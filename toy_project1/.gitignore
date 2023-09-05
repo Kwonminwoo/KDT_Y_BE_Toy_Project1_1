@@ -13,6 +13,8 @@
 .idea/**/shelf
 .idea/misc.xml
 
+*.idea
+*.iml
 
 # AWS User-specific
 .idea/**/aws.xml
