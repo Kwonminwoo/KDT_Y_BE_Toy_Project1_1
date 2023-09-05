@@ -1,6 +1,6 @@
-package service;
+package org.example.service;
 
-import domain.Itinerary;
+import org.example.domain.Itinerary;
 
 public class RecordItinerary {
 
