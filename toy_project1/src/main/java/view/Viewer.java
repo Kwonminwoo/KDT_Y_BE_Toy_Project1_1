@@ -3,7 +3,6 @@ package view;
 import domain.Itinerary;
 import domain.Trip;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,10 +31,7 @@ public class Viewer {
         }
     }
 
-    public Trip receiveTripInfo() {
-        Trip trip = new Trip();
-        List<Itinerary> itineraries = trip.getItineraries();
-
+    public void receiveTripInfo(Trip trip) {
         System.out.println("---여행정보 입력---");
         System.out.print("여행이름: ");
         trip.setTripName(sc.nextLine());;
@@ -43,18 +39,9 @@ public class Viewer {
         trip.setStartDate(sc.nextLine());
         System.out.print("종료날짜: ");
         trip.setEndDate(sc.nextLine());
-
-        do{
-            itineraries.add(receiveItinerary());
-        } while (receiveIfAddItinerary() == 2);
-
-        trip.setItineraries(itineraries);
-        return trip;
     }
 
-    private Itinerary receiveItinerary() {
-        Itinerary itinerary = new Itinerary();
-
+    public void receiveItinerary(Itinerary itinerary) {
         System.out.println("---여정정보 입력---");
         System.out.print("출발지: ");
         itinerary.setDeparturePlace(sc.nextLine());
@@ -68,11 +55,9 @@ public class Viewer {
         itinerary.setCheckIn(sc.nextLine());
         System.out.print("체크아웃 시각: ");
         itinerary.setCheckOut(sc.nextLine());
-
-        return itinerary;
     }
 
-    private int receiveIfAddItinerary() {
+    public int receiveIfAddItinerary() {
         while (true) {
             try {
                 System.out.println("[여정 추가여부] 여정 기록 종료(1) 다른 여정 기록(2)");
@@ -112,7 +97,27 @@ public class Viewer {
                 sc.nextLine();
             }
         }
+    }
 
+    public int receiveFileType() {
+        while (true) {
+            try {
+                System.out.println("[불러올 파일 종류 선택] JSON(1) CSV(2)");
+                int selectedTripOption = sc.nextInt();
+                sc.nextLine();
+
+                if (selectedTripOption < 1 || selectedTripOption > 2) {
+                    System.out.println("리스트에 있는 번호를 입력해주세요.");
+                    continue;
+                }
+
+                return selectedTripOption;
+
+            } catch(Exception e){
+                System.out.println("정수 번호를 입력해야 합니다.");
+                sc.nextLine();
+            }
+        }
     }
 
     public int receiveTripId(List<Trip> trips) {
@@ -139,7 +144,6 @@ public class Viewer {
 
 
     public void printItineraryOfTrip(Trip trip) {
-
         System.out.println("선택한 여행 " + trip.getTripName());
         System.out.println("여행 시작일: " + trip.getStartDate());
         System.out.println("여행 종료일: " + trip.getEndDate());

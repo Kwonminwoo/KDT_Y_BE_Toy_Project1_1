@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Itinerary;
 import domain.Trip;
 import view.Viewer;
 
@@ -32,17 +33,38 @@ public class Controller {
 
     private void recordTrip() {
         do{
-            // 서비스.여행저장(viewer.receiveTripInfo());
+            Trip trip = new Trip();
+            viewer.receiveTripInfo(trip);
+            receiveItineraryFromViewer(trip.getItineraries());
+            // 저장서비스.함수(trip) 저장서비스에 id 제외하고 여행과 하위 여정들이 채워진 trip 전달
         } while(viewer.receiveIfAddTrip() == 2);
     }
 
     private void printTrip() {
-        // 서비스.ID로 Trip 가져오기(viewer.receiveTripId(가져온 Trip 리스트)); //사용자로부터 ID 가져와서 다시 서비스에게 전달
-        // viewer.printItineraryOfTrip(가져온 trip); 해당 trip 의 여정들 출력
+        int fileType = viewer.receiveFileType();
+
+        List<Trip> trips;
+        if(fileType == 1){
+            // trips = JSON 파일로 불러오기
+        } else{
+            // trips = CSV 파일로 불러오기
+        }
+
+        Trip trip = new Trip();
+        // trip = viewer.receiveTripId(trips)); //사용자로부터 ID 가져와서 trip 가져오기
+        viewer.printTrip(trip); // 해당 trip 의 여정들 출력
     }
 
     private void terminate() {
         viewer.printExit();
         exit(0);
+    }
+
+    private void receiveItineraryFromViewer(List<Itinerary> itineraries) {
+        do{
+            Itinerary itinerary = new Itinerary();
+            viewer.receiveItinerary(itinerary);
+            itineraries.add(itinerary);
+        }while(viewer.receiveIfAddItinerary() == 2);
     }
 }
