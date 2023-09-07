@@ -31,7 +31,7 @@
 
 - Java 11
 - Gradle
-- api
+- 의존성
     - opencsv 5.7.1
     - jackson-databind 2.15.2
 
