@@ -40,7 +40,7 @@ public class SaveTripService {
 
     public void saveAsCSV(Trip trip) {
         //TripName_ID.csv 으로 파일 생성 후 , 인코딩 설정
-        String filename = trip.getTripName() + "_" + trip.getTripId() + ".json";
+        String filename = trip.getTripName() + "_" + trip.getTripId() + ".csv";
         Writer writer = new OutputStreamWriter(new FileOutputStream(filename, StandardCharsets.UTF_8);
         //CSV 헤더(컬럼이름) 작성
         writer.append("trip_id,trip_name,start_date,end_date,itinerary_id,departure,destination,departure_time,arrival_time,check_in,check_out\n");
