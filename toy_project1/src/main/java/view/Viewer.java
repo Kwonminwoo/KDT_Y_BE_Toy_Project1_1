@@ -15,7 +15,7 @@ public class Viewer {
         System.out.println("[메인 메뉴] 여행기록(1) 여행조회(2) 종료(3)");
     }
 
-    public String receiveMenuSelectOption() {
+    public String receiveMenuOptionSelection() {
         System.out.print("시작할 메뉴번호를 입력 하세요: ");
         return sc.nextLine();
     }
@@ -30,7 +30,7 @@ public class Viewer {
         trip.setEndDate(sc.nextLine());
     }
 
-    public void receiveItinerary(Itinerary itinerary) {
+    public void receiveItineraryInfo(Itinerary itinerary) {
         System.out.println("---여정정보 입력---");
         System.out.print("출발지: ");
         itinerary.setDeparturePlace(sc.nextLine());
@@ -46,25 +46,25 @@ public class Viewer {
         itinerary.setCheckOut(sc.nextLine());
     }
 
-    public String receiveIfAddItinerary() {
+    public String receiveAddItinerarySelection() {
         System.out.println("[여정 추가여부] 다른 여정 기록(1) 여정 기록 종료(2)");
         System.out.print("여정 추가여부를 선택하세요: ");
         return sc.nextLine();
     }
 
-    public String receiveIfAddTrip() {
+    public String receiveAddTripSelection() {
         System.out.println("[여행 추가여부] 다른 여행 기록(1) 메인으로(2)");
         System.out.print("여행 추가여부를 선택하세요: ");
         return sc.nextLine();
     }
 
-    public String receiveFileType() {
+    public String receiveFileTypeSelection() {
         System.out.println("[불러올 파일 종류 선택] JSON(1) CSV(2)");
         System.out.print("파일 종류를 선택하세요: ");
         return sc.nextLine();
     }
 
-    public void printTripList(List<Trip> trips) {
+    public void printTripsNameAndId(List<Trip> trips) {
         System.out.println("---여행 리스트---");
         for (Trip trip : trips) {
             System.out.print(trip.getTripName() + " 여행   id: ");
@@ -86,7 +86,7 @@ public class Viewer {
 
         List<Itinerary> itineraries = trip.getItineraries();
         for (Itinerary itinerary : itineraries) {
-            System.out.println(itinerary.getDepartureTime() + "로부터 " + itinerary.getDestination() + "의 여정");
+            System.out.println(itinerary.getDeparturePlace() + "로부터 " + itinerary.getDestination() + "의 여정");
             System.out.println("출발시각: " + itinerary.getDepartureTime() + "\t 도착시각: " + itinerary.getArrivalTime());
             System.out.println("체크인: " + itinerary.getCheckIn() + "\t 체크아웃: " + itinerary.getCheckOut());
             System.out.println("---------------------------------------");
@@ -96,6 +96,4 @@ public class Viewer {
     public void printExit() {
         System.out.println("서비스를 종료합니다.");
     }
-
-
 }
