@@ -1,7 +1,8 @@
-package view;
+package org.example.view;
 
-import domain.Itinerary;
-import domain.Trip;
+
+import org.example.model.Itinerary;
+import org.example.model.Trip;
 
 import java.util.List;
 import java.util.Scanner;
@@ -110,6 +111,7 @@ public class Viewer {
             System.out.println("| 체크아웃: " + itinerary.getCheckOut() + "\t\t\t\t\t\t|");
             System.out.println("-------------------------------------------------");
         }
+
     }
 
     public void printExit() {
