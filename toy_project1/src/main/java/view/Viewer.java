@@ -36,13 +36,13 @@ public class Viewer {
         itinerary.setDeparturePlace(sc.nextLine());
         System.out.print("도착지: ");
         itinerary.setDestination(sc.nextLine());
-        System.out.print("출발시각 입력\t(시각 입력예시: 02030101-2030)");
+        System.out.print("출발시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setDepartureTime(sc.nextLine());
-        System.out.print("도착시각 입력\t(시각 입력예시: 02030101-2030)");
+        System.out.print("도착시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setArrivalTime(sc.nextLine());
-        System.out.print("체크인 시각 입력\t(시각 입력예시: 02030101-2030)");
+        System.out.print("체크인 시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setCheckIn(sc.nextLine());
-        System.out.print("체크아웃 시각 입력\t(시각 입력예시: 02030101-2030)");
+        System.out.print("체크아웃 시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setCheckOut(sc.nextLine());
     }
 
