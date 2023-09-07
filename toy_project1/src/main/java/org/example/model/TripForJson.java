@@ -21,12 +21,4 @@ public class TripForJson extends Trip {
         setEndDate(endDate);
         setItineraries(itineraries);
     }
-
-    public void printTripInfo() { // TODO: FOR TEST. -> have to remove later.
-        System.out.println("Trip ID: " + getTripId());
-        System.out.println("Trip Name: " + getTripName());
-        System.out.println("Start Date: " + getStartDate());
-        System.out.println("End Date: " + getEndDate());
-        System.out.println("Itineraries: " + getItineraries());
-    }
 }

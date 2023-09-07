@@ -5,7 +5,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.example.model.Itinerary;
 import org.example.model.Trip;
-//import org.example.model.TripForCsv;
 import org.example.model.TripForJson;
 import org.example.util.FileListLoader;
 import org.example.util.FolderLocator;
@@ -13,8 +12,6 @@ import org.example.util.FolderLocator;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +36,6 @@ public class TripDao {
 
     public List<Trip> findTripsAsCsvFrom() {
         List<File> csvFiles = FileListLoader.getCsvFiles(FolderLocator.getPath());
-//        List<Trip> trips = new ArrayList<>();
-//        Trip tripForCsv = new Trip();
 
         List<Trip> trips = new ArrayList<>();
         for (File csvFile : csvFiles) {
@@ -75,17 +70,6 @@ public class TripDao {
         }
         return trips;
     }
-
-//    public Trip findTripByIdFromJson(int id) { // 웹 MVC 패턴을 굳이 따랐다. 그래서 이렇게 했다.
-//        // id로 파일 읽어서 json 반환
-//
-//        return null;
-//    }
-//
-//    public Trip findTripByIdFromCsv(int id) {
-//
-//        return null;
-//    }
 
     public void saveTripToJson(Trip trip) {
         // 파일
