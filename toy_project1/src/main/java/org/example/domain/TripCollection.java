@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.model.Trip;
+
 import java.util.ArrayList;
 import java.util.List;
 

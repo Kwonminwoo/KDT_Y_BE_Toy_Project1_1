@@ -1,4 +1,4 @@
-package org.example.domain;
+package org.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +58,26 @@ public class Trip {
 
     public void setItineraries(List<Itinerary> itineraries) {
         Itineraries = itineraries;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Trip ID: ").append(tripId).append("\n");
+        stringBuilder.append("Trip Name: ").append(tripName).append("\n");
+        stringBuilder.append("Start Date: ").append(startDate).append("\n");
+        stringBuilder.append("End Date: ").append(endDate).append("\n");
+
+        for (Itinerary itinerary : Itineraries) {
+            stringBuilder.append("Itinerary ID: ").append(itinerary.getItineraryId()).append("\n");
+            stringBuilder.append("Departure Place: ").append(itinerary.getDeparturePlace()).append("\n");
+            stringBuilder.append("Destination: ").append(itinerary.getDestination()).append("\n");
+            stringBuilder.append("Departure Time: ").append(itinerary.getDepartureTime()).append("\n");
+            stringBuilder.append("Arrival Time: ").append(itinerary.getArrivalTime()).append("\n");
+            stringBuilder.append("Check-In: ").append(itinerary.getCheckIn()).append("\n");
+            stringBuilder.append("Check-Out: ").append(itinerary.getCheckOut()).append("\n");
+        }
+
+        return stringBuilder.toString();
     }
 }
