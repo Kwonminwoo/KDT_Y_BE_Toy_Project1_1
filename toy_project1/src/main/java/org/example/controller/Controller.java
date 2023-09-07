@@ -1,135 +1,152 @@
-//package org.example.controller;
-//
-//import domain.Itinerary;
-//import domain.Trip;
-//import org.example.view.Viewer;
-//
-//import java.util.List;
-//
-//import static java.lang.System.exit;
-//
-//public class Controller {
-//    final int ERROR = -9999999;
-//    Viewer viewer = new Viewer();
-//
-//    public void run() {
-//        viewer.printMenuOption();
-//        int menuOption;
-//        while (true){
-//            menuOption = toInteger(viewer.receiveMenuOptionSelection());
-//            if (menuOption != -ERROR && isInOptionRange(menuOption, 3)) {
-//                break;
-//            }
-//        }
-//
-//        switch (menuOption) {
-//            case 1:
-//                recordTrip();
-//                break;
-//
-//            case 2:
-//                printTrip();
-//                break;
-//
-//            case 3:
-//                terminate();
-//        }
-//
-//        run();
-//    }
-//    private void recordTrip() {
-//
-//        Trip trip = new Trip();
-//        viewer.receiveTripInfo(trip);
-//        receiveItineraryFromViewer(trip.getItineraries());
-//        // 저장서비스.함수(trip) 저장서비스에 id 제외하고 여행과 하위 여정들이 채워진 trip 전달
-//
-//        int ifAddTrip;
-//        while (true){
-//            ifAddTrip = toInteger(viewer.receiveAddTripSelection());
-//            if (ifAddTrip != ERROR && isInOptionRange(ifAddTrip, 2)) {
-//                break;
-//            }
-//        }
-//
-//        if (ifAddTrip == 2) {
-//            return;
-//        }
-//
-//        recordTrip();
-//
-//    }
-//
-//
-//    private void printTrip() {
-//        int fileTypeNum;
-//        while (true){
-//            fileTypeNum = toInteger(viewer.receiveFileTypeSelection());
-//            if (fileTypeNum != ERROR && isInOptionRange(fileTypeNum, 2)) {
-//                break;
-//            }
-//        }
-//
-//        List<Trip> trips;
-//        if(fileTypeNum == 1){
-//            // trips = JSON 파일로 불러오기
-//        } else{
-//            // trips = CSV 파일로 불러오기
-//        }
-//        // viewer.printTripList(trips); 불러온 여행리스트 이름, ID로 출력
-//
-//        int selectedTripId;
-//        while (true){
-//            selectedTripId = toInteger(viewer.receiveTripId());
-//            if (selectedTripId != ERROR) {
-//                break;
-//            }
-//        }
-//        // trip = 서비스.id로trip반환(selectedTripId)  선택된 id의 trip받아오기
-//        // viewer.printTrip(trip1);
-//    }
-//
-//    private void terminate() {
-//        viewer.printExit();
-//        exit(0);
-//    }
-//
-//    private void receiveItineraryFromViewer(List<Itinerary> itineraries) {
-//        while (true) {
-//            Itinerary itinerary = new Itinerary();
-//            viewer.receiveItineraryInfo(itinerary);
-//            itineraries.add(itinerary);
-//
-//            int ifAddItinerary;
-//            while (true){
-//                ifAddItinerary = toInteger(viewer.receiveAddItinerarySelection());
-//                if (ifAddItinerary != ERROR && isInOptionRange(ifAddItinerary, 2)) {
-//                    break;
-//                }
-//            }
-//
-//            if (ifAddItinerary == 2) {
-//                break;
-//            }
-//
-//        }
-//    }
-//
-//    private int toInteger(String num) {
-//        try {
-//            int integerNum = Integer.parseInt(num);
-//            return integerNum;
-//        } catch (NumberFormatException e) {
-//            System.out.println("정수가 아닙니다. 다시 입력해주세요.");
-//            return ERROR;
-//        }
-//    }
-//
-//    private boolean isInOptionRange(int optionNum, int maxOptionNum) {
-//        if(optionNum < 1 || optionNum > maxOptionNum){
-//            System.out.println("리스트에 있는 번호를 입력해주세요.");
-//            return false;
-//        }
-//        return true;
-//    }
-//}
+package org.example.controller;
+
+import org.example.model.Itinerary;
+import org.example.model.Trip;
+import org.example.repository.TripDao;
+import org.example.service.TripExplorerService;
+import org.example.view.Viewer;
+import org.example.service.TripRecordService;
+
+import java.util.List;
+
+import static java.lang.System.exit;
+
+public class Controller {
+    private static Controller instance;
+    private final Viewer viewer = new Viewer();
+    private final TripDao tripDao = new TripDao();
+    private final int NOT_APPROPRIATE_NUMBER = -999999999;
+
+    private final TripExplorerService searchTripService = new TripExplorerService(tripDao);
+    private final TripRecordService saveTripService = new TripRecordService();
+
+    private Controller() {
+    }
+
+    public static synchronized Controller getInstance() {
+        if (instance == null)
+            instance = new Controller();
+        return instance;
+    }
+
+    public void launch() {
+        viewer.printMenuOption();
+        int menuOptionNumber;
+        while (true) {
+            menuOptionNumber = ParseStringToInteger(viewer.receiveMenuSelection());
+            if (menuOptionNumber != -NOT_APPROPRIATE_NUMBER && checkValidOptionNumberRange(menuOptionNumber, 3)) { // TODO: magic number
+                break;
+            }
+        }
+        switch (menuOptionNumber) {
+            case 1: // TODO: magic number
+                recordTrip();
+                break;
+
+            case 2: // TODO: magic number
+                printTrip();
+                break;
+
+            case 3: // TODO: magic number
+                terminate();
+        }
+        launch();
+    }
+
+    private void recordTrip() {
+        Trip trip = new Trip();
+        trip = viewer.returnTripInformationFromConsole(trip);
+        recordItineraries(trip);
+        saveTripService.setIdToTrip(trip);
+        saveTripService.saveJsonToFile(trip);
+        saveTripService.saveCsvToFile(trip);
+
+        int numberOfTripRecordSelection;
+        while (true) {
+            numberOfTripRecordSelection = ParseStringToInteger(viewer.receiveTripSelection());
+            if (numberOfTripRecordSelection != NOT_APPROPRIATE_NUMBER &&
+                    checkValidOptionNumberRange(numberOfTripRecordSelection, 2)) { // TODO: magic number
+                break;
+            }
+        }
+        if (numberOfTripRecordSelection == 2) { // TODO: magic number
+            return;
+        }
+        recordTrip();
+    }
+
+    private void printTrip() {
+        int numberOfFileType;
+        while (true) {
+            numberOfFileType = ParseStringToInteger(viewer.receiveFileTypeSelection());
+            if (numberOfFileType != NOT_APPROPRIATE_NUMBER && checkValidOptionNumberRange(numberOfFileType, 2)) { // TODO: magic number
+                break;
+            }
+        }
+
+        List<Trip> trips;
+        if (numberOfFileType == 1) { // TODO: magic number
+            trips = searchTripService.getTripsAs(".json"); // TODO: magic number
+        } else {
+            trips = searchTripService.getTripsAs(".csv"); // TODO: magic number
+        }
+        viewer.printTripsNameAndId(trips);
+
+        int selectedTripId;
+        while (true) {
+            selectedTripId = ParseStringToInteger(viewer.receiveTripId());
+            if (selectedTripId != NOT_APPROPRIATE_NUMBER) {
+                break;
+            }
+        }
+        Trip foundTrip = searchTripService.getTripById(selectedTripId);
+        viewer.printTripDetailInformation(foundTrip);
+    }
+
+    private Trip recordItineraries(Trip trip) {
+        int maximumOptionNumber = 2;
+        List<Itinerary> itineraries = trip.getItineraries();
+
+        while (true) {
+            Itinerary itinerary = viewer.returnItineraryInformationFromConsole(new Itinerary());
+            itineraries.add(itinerary); // TODO; Role 1
+
+            int ItineraryOptionNumber;
+            while (true) { // TODO: need to make method for clarification e.g., checkValidItineraryOptionNumber
+                ItineraryOptionNumber = ParseStringToInteger(viewer.receiveItinerarySelection());
+                if (ItineraryOptionNumber != NOT_APPROPRIATE_NUMBER && checkValidOptionNumberRange(ItineraryOptionNumber, maximumOptionNumber)) { // TODO: magic number
+                    break;
+                }
+            }
+            if (ItineraryOptionNumber == maximumOptionNumber) { // TODO: magic number
+                break;
+            }
+        }
+        trip.setItineraries(itineraries);
+        return trip;
+    }
+
+    private void terminate() {
+        viewer.printExitMessage();
+        exit(0); // TODO: magic number
+    }
+
+    private int ParseStringToInteger(String num) {
+        try { // TODO: Exception, if-else
+            int integerNum = Integer.parseInt(num);
+            return integerNum;
+        } catch (NumberFormatException e) {
+            System.out.println("정수가 아닙니다. 다시 입력해주세요."); // TODO: magic number
+            return NOT_APPROPRIATE_NUMBER;
+        }
+    }
+
+    private boolean checkValidOptionNumberRange(int optionNumber, int maximumOptionsNumber) {
+        int minimumOptionValue = 1;
+        if (optionNumber < minimumOptionValue || optionNumber > maximumOptionsNumber) { // TODO: magic number & Exception
+            System.out.println("리스트에 있는 번호를 입력해주세요."); // TODO: magic number
+            return false;
+        }
+        return true;
+    }
+}

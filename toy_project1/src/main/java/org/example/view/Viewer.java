@@ -16,25 +16,28 @@ public class Viewer {
         System.out.println("| [메인 메뉴] 여행기록(1) 여행조회(2) 종료(3)\t\t|");
     }
 
-    public String receiveMenuOptionSelection() {
+    public String receiveMenuSelection() {
         System.out.print("| 시작할 메뉴번호를 입력 하세요: ");
         return sc.nextLine();
     }
 
-    public void receiveTripInfo(Trip trip) {
+    public Trip returnTripInformationFromConsole(Trip trip) {
         System.out.println("+-----------------------------------------------+");
         System.out.println("|\t\t\t\t\t여행정보 입력\t\t\t\t\t|");
         System.out.print("| 여행이름: ");
-        trip.setTripName(sc.nextLine());;
+        trip.setTripName(sc.nextLine());
+
         System.out.println("| 여행 시작날짜 입력 (입력예시: 20230101)\t\t\t|");
         System.out.print("| 여행 시작날짜: ");
         trip.setStartDate(sc.nextLine());
         System.out.println("| 여행 종료날짜 입력 (입력예시: 20230101)\t\t\t|");
         System.out.print("| 여행 종료날짜: ");
         trip.setEndDate(sc.nextLine());
+
+        return trip;
     }
 
-    public void receiveItineraryInfo(Itinerary itinerary) {
+    public Itinerary returnItineraryInformationFromConsole(Itinerary itinerary) {
         System.out.println("|-----------------------------------------------|");
         System.out.println("|\t\t\t\t\t여정정보 입력\t\t\t\t\t|");
         System.out.print("| 출발지: ");
@@ -53,16 +56,18 @@ public class Viewer {
         System.out.println("| 체크아웃 시각 입력 (입력예시: 20230101-2030)\t\t|");
         System.out.print("| 체크아웃 시각: ");
         itinerary.setCheckOut(sc.nextLine());
+
+        return itinerary;
     }
 
-    public String receiveAddItinerarySelection() {
+    public String receiveItinerarySelection() {
         System.out.println("|-----------------------------------------------|");
         System.out.println("| [여정 추가여부] 다른 여정 기록(1) 여정 기록 종료(2)\t|");
         System.out.print("| 여정 추가여부를 선택하세요: ");
         return sc.nextLine();
     }
 
-    public String receiveAddTripSelection() {
+    public String receiveTripSelection() {
         System.out.println("|-----------------------------------------------|");
         System.out.println("| [여행 추가여부] 다른 여행 기록(1) 메인으로(2)\t\t|");
         System.out.print("| 여행 추가여부를 선택하세요: ");
@@ -90,7 +95,7 @@ public class Viewer {
     }
 
 
-    public void printTrip(Trip trip) {
+    public void printTripDetailInformation(Trip trip) {
         System.out.println("+-----------------------------------------------+");
         System.out.println("|       선택한 여행 정보\t\t\t\t\t\t\t|");
         System.out.println("+-----------------------------------------------+");
@@ -114,7 +119,7 @@ public class Viewer {
 
     }
 
-    public void printExit() {
+    public void printExitMessage() {
         System.out.println("| 이용해주셔서 감사합니다. 서비스를 종료합니다.\t\t|");
         System.out.println("+-----------------------------------------------+");
     }

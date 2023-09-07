@@ -5,7 +5,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.example.model.Itinerary;
 import org.example.model.Trip;
-import org.example.model.TripForJson;
 import org.example.util.FileListLoader;
 import org.example.util.FolderLocator;
 
@@ -16,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TripDao {
-    public List<Trip> findTripsAsJsonFrom() {
-        TripForJson tripForJson;
+    public List<Trip> findTripsAsJson() {
+        Trip tripForJson;
         ObjectMapper objectMapper = new ObjectMapper();
 
-        List<File> jsonFiles = FileListLoader.getJsonFiles(FolderLocator.getPath());
+        List<File> jsonFiles = FileListLoader.getJsonFiles(FolderLocator.getPath()); // TODO: Exception> File path is not correct. Please confirm your OS type.
         List<Trip> trips = new ArrayList<>();
 
         for (File jsonFile : jsonFiles) {
             try {
-                tripForJson = objectMapper.readValue(jsonFile, TripForJson.class);
+                tripForJson = objectMapper.readValue(jsonFile, Trip.class);
                 trips.add(tripForJson);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -34,18 +33,19 @@ public class TripDao {
         return trips;
     }
 
-    public List<Trip> findTripsAsCsvFrom() {
-        List<File> csvFiles = FileListLoader.getCsvFiles(FolderLocator.getPath());
+    public List<Trip> findTripsAsCsv() {
+        List<File> csvFiles = FileListLoader.getCsvFiles(FolderLocator.getPath()); // TODO: Exception> File path is not correct. Please confirm your OS type.
 
         List<Trip> trips = new ArrayList<>();
         for (File csvFile : csvFiles) {
+            Trip trip = new Trip();
             try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
                 List<String[]> records = reader.readAll();
 
                 records.remove(0);
 
+                List<Itinerary> itineraries = new ArrayList<>();
                 for (String[] record : records) {
-                    Trip trip = new Trip();
                     trip.setTripId(Integer.parseInt(record[0]));
                     trip.setTripName(record[1]);
                     trip.setStartDate(record[2]);
@@ -60,23 +60,15 @@ public class TripDao {
                     itinerary.setCheckIn(record[9]);
                     itinerary.setCheckOut(record[10]);
 
-                    trip.getItineraries().add(itinerary);
-
-                    trips.add(trip);
+                    itineraries.add(itinerary);
                 }
+                trip.setItineraries(itineraries);
             } catch (IOException | CsvException e) {
                 e.printStackTrace();
             }
+            trips.add(trip);
         }
         return trips;
-    }
-
-    public void saveTripToJson(Trip trip) {
-        // 파일
-    }
-
-    public void saveTripToCsv(Trip trip) {
-
     }
 }
 

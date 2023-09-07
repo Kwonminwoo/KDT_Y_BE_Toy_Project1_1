@@ -1,12 +1,23 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Itinerary {
+    @JsonProperty("itinerary_id")
     private int itineraryId;
+    @JsonProperty("departure_place")
     private String departurePlace;
+    @JsonProperty("destination")
     private String destination;
+    @JsonProperty("departure_time")
     private String departureTime;
+    @JsonProperty("arrival_time")
     private String arrivalTime;
+    @JsonProperty("check_in")
     private String checkIn;
+    @JsonProperty("check_out")
     private String checkOut;
 
 
@@ -78,4 +89,6 @@ public class Itinerary {
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
+
+    // TODO: ToSting()
 }

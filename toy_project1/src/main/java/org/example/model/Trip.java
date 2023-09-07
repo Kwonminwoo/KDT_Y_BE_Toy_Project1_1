@@ -1,13 +1,22 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Trip {
+    @JsonProperty("trip_id")
     private int tripId;
+    @JsonProperty("trip_name")
     private String tripName;
+    @JsonProperty("start_date")
     private String startDate;
+    @JsonProperty("end_date")
     private String endDate;
+    @JsonProperty("itineraries")
     private List<Itinerary> Itineraries = new ArrayList<>();
 
     public Trip(int tripId, String tripName, String startDate, String endDate) {

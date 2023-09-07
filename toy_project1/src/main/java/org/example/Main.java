@@ -1,10 +1,10 @@
 package org.example;
 
-import org.example.controller.SearchTripController;
+import org.example.controller.Controller;
 
 public class Main {
     public static void main(String[] args) {
-        SearchTripController controller = SearchTripController.getInstance();
-        controller.launch();
+        Controller searchTripController = Controller.getInstance();
+        searchTripController.launch();
     }
 }

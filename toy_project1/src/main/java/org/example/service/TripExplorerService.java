@@ -5,24 +5,24 @@ import org.example.repository.TripDao;
 
 import java.util.List;
 
-public class SearchTripService {
+public class TripExplorerService {
     private final TripDao tripDao;
 
-    public SearchTripService(TripDao tripDao) {
+    public TripExplorerService(TripDao tripDao) {
         this.tripDao = tripDao;
     }
 
     public List<Trip> getTripsAs(String fileFormat) {
         if (".json".equals(fileFormat)) {
-            return tripDao.findTripsAsJsonFrom(); // TODO: Exception: Empty Exception
+            return tripDao.findTripsAsJson(); // TODO: Exception: Empty Exception
         }
-        return tripDao.findTripsAsCsvFrom();
+        return tripDao.findTripsAsCsv();
     }
 
     public Trip getTripById(int tripId) {
         // DAO
         Trip foundTrip = new Trip();
-        List<Trip> trips = tripDao.findTripsAsJsonFrom();
+        List<Trip> trips = tripDao.findTripsAsJson();
         for (Trip trip : trips) {
             if (trip.getTripId() == tripId) {
                 foundTrip = trip;
