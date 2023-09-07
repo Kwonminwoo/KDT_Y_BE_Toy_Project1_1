@@ -36,13 +36,13 @@ public class Viewer {
         itinerary.setDeparturePlace(sc.nextLine());
         System.out.print("도착지: ");
         itinerary.setDestination(sc.nextLine());
-        System.out.print("출발시각 입력\t(시각 입력예시: 20230101-2030)");
+        System.out.println("출발시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setDepartureTime(sc.nextLine());
-        System.out.print("도착시각 입력\t(시각 입력예시: 20230101-2030)");
+        System.out.println("도착시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setArrivalTime(sc.nextLine());
-        System.out.print("체크인 시각 입력\t(시각 입력예시: 20230101-2030)");
+        System.out.println("체크인 시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setCheckIn(sc.nextLine());
-        System.out.print("체크아웃 시각 입력\t(시각 입력예시: 20230101-2030)");
+        System.out.println("체크아웃 시각 입력\t(시각 입력예시: 20230101-2030)");
         itinerary.setCheckOut(sc.nextLine());
     }
 
@@ -79,7 +79,8 @@ public class Viewer {
 
 
     public void printTrip(Trip trip) {
-        System.out.println("선택한 여행 " + trip.getTripName());
+        System.out.println();
+        System.out.println("선택한 여행: " + trip.getTripName());
         System.out.println("여행 시작일: " + trip.getStartDate());
         System.out.println("여행 종료일: " + trip.getEndDate());
         System.out.println();
@@ -89,11 +90,11 @@ public class Viewer {
             System.out.println(itinerary.getDeparturePlace() + "로부터 " + itinerary.getDestination() + "의 여정");
             System.out.println("출발시각: " + itinerary.getDepartureTime() + "\t 도착시각: " + itinerary.getArrivalTime());
             System.out.println("체크인: " + itinerary.getCheckIn() + "\t 체크아웃: " + itinerary.getCheckOut());
-            System.out.println("---------------------------------------");
         }
     }
 
     public void printExit() {
         System.out.println("서비스를 종료합니다.");
+        System.out.println("---------------------------------------");
     }
 }
