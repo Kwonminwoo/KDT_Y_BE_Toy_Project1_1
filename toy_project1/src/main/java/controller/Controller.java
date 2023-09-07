@@ -16,7 +16,7 @@ public class Controller {
         viewer.printMenuOption();
         int menuOption;
         while (true){
-            menuOption = toInteger(viewer.receiveMenuSelectOption());
+            menuOption = toInteger(viewer.receiveMenuOptionSelection());
             if (menuOption != -ERROR && isInOptionRange(menuOption, 3)) {
                 break;
             }
@@ -47,7 +47,7 @@ public class Controller {
 
         int ifAddTrip;
         while (true){
-            ifAddTrip = toInteger(viewer.receiveIfAddTrip());
+            ifAddTrip = toInteger(viewer.receiveAddTripSelection());
             if (ifAddTrip != ERROR && isInOptionRange(ifAddTrip, 2)) {
                 break;
             }
@@ -57,14 +57,14 @@ public class Controller {
             return;
         }
 
-
+        recordTrip();
 
     }
 
     private void printTrip() {
         int fileTypeNum;
         while (true){
-            fileTypeNum = toInteger(viewer.receiveFileType());
+            fileTypeNum = toInteger(viewer.receiveFileTypeSelection());
             if (fileTypeNum != ERROR && isInOptionRange(fileTypeNum, 2)) {
                 break;
             }
@@ -81,14 +81,12 @@ public class Controller {
         int selectedTripId;
         while (true){
             selectedTripId = toInteger(viewer.receiveTripId());
-            if (selectedTripId != ERROR && isInOptionRange(selectedTripId, 2)) {
+            if (selectedTripId != ERROR) {
                 break;
             }
         }
         // trip = 서비스.id로trip반환(selectedTripId)  선택된 id의 trip받아오기
-        Trip trip = new Trip();
-        viewer.printTrip(trip);
-        // viewer.printTrip(trip); // 해당 trip 의 여정들 출력
+        // viewer.printTrip(trip1);
     }
 
     private void terminate() {
@@ -99,12 +97,12 @@ public class Controller {
     private void receiveItineraryFromViewer(List<Itinerary> itineraries) {
         while (true) {
             Itinerary itinerary = new Itinerary();
-            viewer.receiveItinerary(itinerary);
+            viewer.receiveItineraryInfo(itinerary);
             itineraries.add(itinerary);
 
             int ifAddItinerary;
             while (true){
-                ifAddItinerary = toInteger(viewer.receiveIfAddItinerary());
+                ifAddItinerary = toInteger(viewer.receiveAddItinerarySelection());
                 if (ifAddItinerary != ERROR && isInOptionRange(ifAddItinerary, 2)) {
                     break;
                 }
