@@ -28,19 +28,19 @@ public class FileListLoader {
         File[] wholeFiles = getFilesFrom(directoryPath);
         List<File> files = new ArrayList<>();
 
-        if (wholeFiles.length == 0)
-            throw new NullPointerException("Any files doesn't exist in this directory. Please confirm base path.");
+//        if (wholeFiles.length == 0)
+//            throw new NullPointerException("Any files doesn't exist in this directory. Please confirm base path.");
 
         for (File file : wholeFiles) {
             if (file.isFile() && file.getName().endsWith(fileFormat))
                 files.add(file);
         }
 
-        try {
-            Verifier.validExistenceOf(files);
-        } catch (FileNotExistException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Verifier.validExistenceOf(files);
+//        } catch (FileNotExistException e) {
+//            e.printStackTrace();
+//        }
 
         return files;
     }

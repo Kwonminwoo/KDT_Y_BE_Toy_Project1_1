@@ -1,11 +1,10 @@
 package org.example;
 
-import controller.Controller;
-import view.Viewer;
+import org.example.controller.SearchTripController;
 
 public class Main {
     public static void main(String[] args) {
-        Controller controller = new Controller();
-        controller.run();
+        SearchTripController controller = SearchTripController.getInstance();
+        controller.launch();
     }
 }

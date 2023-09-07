@@ -10,11 +10,11 @@ public class TripForJson extends Trip {
     }
 
     @JsonCreator
-    public TripForJson(@JsonProperty("tripId") int tripId,
-                       @JsonProperty("tripName") String tripName,
-                       @JsonProperty("startDate") String startDate,
-                       @JsonProperty("endDate") String endDate,
-                       @JsonProperty("Itineraries") List<Itinerary> itineraries) {
+    public TripForJson(@JsonProperty("trip_id") int tripId,
+                       @JsonProperty("trip_name") String tripName,
+                       @JsonProperty("start_date") String startDate,
+                       @JsonProperty("end_date") String endDate,
+                       @JsonProperty("itineraries") List<Itinerary> itineraries) {
         setTripId(tripId);
         setTripName(tripName);
         setStartDate(startDate);
