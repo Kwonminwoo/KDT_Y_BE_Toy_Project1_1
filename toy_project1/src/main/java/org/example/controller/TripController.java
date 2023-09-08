@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.exeption.FileNotExistException;
 import org.example.exeption.NotAppropriateOptionException;
 import org.example.exeption.NotIntegerException;
 import org.example.model.Itinerary;
@@ -9,6 +10,7 @@ import org.example.util.Verifier;
 import org.example.view.Viewer;
 import org.example.service.SaveTripService;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.System.exit;
 import static org.example.util.constant.FileNameConstant.*;
@@ -107,10 +109,14 @@ public class TripController {
             }
         }
 
-        Trip foundTrip = searchTripService.getTripById(selectedTripId);
-        viewer.printTrip(foundTrip);
+        Optional<Trip> foundTripOptional = searchTripService.getTripById(selectedTripId);
+        try {
+            Trip foundTrip = foundTripOptional.orElseThrow(FileNotExistException::new);
+            viewer.printTrip(foundTrip);
+        } catch (FileNotExistException e) {
+            e.printStackTrace();
+        }
     }
-
 
     private void receiveItinerary(List<Itinerary> itineraries) {
         while (true) {
