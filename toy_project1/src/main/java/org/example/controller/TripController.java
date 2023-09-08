@@ -6,6 +6,7 @@ import org.example.exeption.NotIntegerException;
 import org.example.model.Itinerary;
 import org.example.model.Trip;
 import org.example.service.SearchTripService;
+import org.example.util.FolderCreator;
 import org.example.util.Verifier;
 import org.example.view.Viewer;
 import org.example.service.SaveTripService;
@@ -25,6 +26,8 @@ public class TripController {
         this.viewer = viewer;
         this.searchTripService = searchTripService;
         this.saveTripService = saveTripService;
+
+        FolderCreator.createFolder();
     }
 
     public void launch() {

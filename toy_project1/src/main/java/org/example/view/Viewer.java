@@ -65,7 +65,7 @@ public class Viewer {
     }
     public String receiveFileTypeSelection() {
         System.out.println("|-----------------------------------------------|");
-        System.out.println("| [불러올 파일 종류 선택] JSON(1) CSV(2)\t\t\t|");
+        System.out.println("| [불러올 파일 종류 선택] JSON(1) CSV(2)\t\t\t\t|");
         System.out.print("| 파일 종류를 선택하세요: ");
         return sc.nextLine();
     }
@@ -100,9 +100,10 @@ public class Viewer {
             System.out.println("| 체크아웃: " + itinerary.getCheckOut());
             System.out.println("-------------------------------------------------");
         }
+
     }
     public void printExit() {
-        System.out.println("| 이용해주셔서 감사합니다. 서비스를 종료합니다.\t\t|");
+        System.out.println("| 이용해주셔서 감사합니다. 서비스를 종료합니다.\t\t\t|");
         System.out.println("+-----------------------------------------------+");
     }
 }
