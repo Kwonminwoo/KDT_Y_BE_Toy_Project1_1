@@ -2,9 +2,7 @@ package org.example.service;
 
 import org.example.model.Trip;
 import org.example.repository.TripDao;
-
 import java.util.List;
-
 import static org.example.util.constant.FileNameConstant.*;
 
 public class SearchTripService {

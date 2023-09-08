@@ -48,7 +48,6 @@ public class FileListLoader {
         return directory.listFiles();
     }
 
-
     public static int getNumberFromLastFiles(String directoryPath) {
         File[] files = getFilesFrom(directoryPath);
 
@@ -80,17 +79,15 @@ public class FileListLoader {
 
         Pattern patternForExtractedNumber = Pattern.compile(PATTERN_TO_EXTRACT_NUMBER);
         assert fileNames != null;
-        int SizeOfFileNamesList = fileNames.size();
+        int sizeOfFileNamesList = fileNames.size();
         int numberOfLastFile = 0;
-        if (SizeOfFileNamesList >= MINIMUM_NUMBER) {
+        if (sizeOfFileNamesList >= MINIMUM_NUMBER) {
             Matcher matcherNumberOfLastFile = patternForExtractedNumber.matcher(fileNames.get(fileNames.size() - 1));
             while (matcherNumberOfLastFile.find()) {
-                numberOfLastFile = Integer.parseInt(matcherNumberOfLastFile.group()); // 숫자로 변환
+                numberOfLastFile = Integer.parseInt(matcherNumberOfLastFile.group());
             }
         }
 
         return numberOfLastFile;
     }
-
-
 }

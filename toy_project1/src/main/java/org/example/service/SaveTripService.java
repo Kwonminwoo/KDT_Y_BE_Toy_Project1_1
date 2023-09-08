@@ -23,7 +23,6 @@ public class SaveTripService {
             itinerary.setItineraryId(itineraryId++);
         }
     }
-
     public void saveTrip(Trip trip){
         tripDao.saveTripAsJSON(trip);
         tripDao.saveTripAsCSV(trip);
