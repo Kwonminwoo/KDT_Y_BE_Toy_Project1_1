@@ -110,15 +110,13 @@ public class TripController {
         }
 
         Optional<Trip> foundTripOptional = searchTripService.getTripById(selectedTripId);
-        Trip foundTrip;
         try {
-            foundTrip = foundTripOptional.orElseThrow(() -> new FileNotExistException());
+            Trip foundTrip = foundTripOptional.orElseThrow(FileNotExistException::new);
             viewer.printTrip(foundTrip);
         } catch (FileNotExistException e) {
             e.printStackTrace();
         }
     }
-
 
     private void receiveItinerary(List<Itinerary> itineraries) {
         while (true) {
