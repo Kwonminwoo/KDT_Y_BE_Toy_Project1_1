@@ -1,25 +1,24 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static org.example.util.constant.ItineraryAttributeConstant.*;
+
 public class Itinerary {
+    @JsonProperty(ITINERARY_ID)
     private int itineraryId;
+    @JsonProperty(ITINERARY_DEPARTURE_PLACE)
     private String departurePlace;
+    @JsonProperty(ITINERARY_DESTINATION)
     private String destination;
+    @JsonProperty(ITINERARY_DEPARTURE_TIME)
     private String departureTime;
+    @JsonProperty(ITINERARY_ARRIVAL_TIME)
     private String arrivalTime;
+    @JsonProperty(ITINERARY_CHECK_IN)
     private String checkIn;
+    @JsonProperty(ITINERARY_CHECK_OUT)
     private String checkOut;
-
-
-    public Itinerary(int itineraryId, String departurePlace, String destination, String departureTime, String arrivalTime, String checkIn, String checkOut) {
-        this.itineraryId = itineraryId;
-        this.departurePlace = departurePlace;
-        this.destination = destination;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-    }
-
     public Itinerary() {
     }
 
