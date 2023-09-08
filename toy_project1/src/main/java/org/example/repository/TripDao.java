@@ -17,6 +17,8 @@ import static org.example.util.constant.TripAttributeConstant.*;
 import static org.example.util.constant.TripAttributeConstant.TRIP_END_DATE;
 
 public class TripDao {
+    private final static int NUMBER_FOR_CSV_HEADER = 0;
+
     public List<Trip> findTripsAsJsonFrom() {
         Trip tripForJson;
         ObjectMapper objectMapper = new ObjectMapper();
@@ -44,7 +46,7 @@ public class TripDao {
             try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
                 List<String[]> records = reader.readAll();
 
-                records.remove(0);
+                records.remove(NUMBER_FOR_CSV_HEADER);
 
                 List<Itinerary> itineraries = new ArrayList<>();
                 for (String[] record : records) {
@@ -109,4 +111,3 @@ public class TripDao {
         }
     }
 }
-

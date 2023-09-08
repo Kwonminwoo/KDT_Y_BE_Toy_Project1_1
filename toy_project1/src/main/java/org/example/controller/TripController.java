@@ -4,7 +4,6 @@ import org.example.exeption.NotAppropriateOptionException;
 import org.example.exeption.NotIntegerException;
 import org.example.model.Itinerary;
 import org.example.model.Trip;
-import org.example.repository.TripDao;
 import org.example.service.SearchTripService;
 import org.example.util.Verifier;
 import org.example.view.Viewer;
@@ -17,13 +16,11 @@ import static org.example.util.constant.MenuOptionConstant.*;
 
 public class TripController {
     private Viewer viewer;
-    private TripDao tripDao;
     private SearchTripService searchTripService;
     private SaveTripService saveTripService;
 
-    public TripController(Viewer viewer, TripDao tripDao, SearchTripService searchTripService, SaveTripService saveTripService) {
+    public TripController(Viewer viewer, SearchTripService searchTripService, SaveTripService saveTripService) {
         this.viewer = viewer;
-        this.tripDao = tripDao;
         this.searchTripService = searchTripService;
         this.saveTripService = saveTripService;
     }

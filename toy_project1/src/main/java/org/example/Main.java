@@ -14,7 +14,7 @@ public class Main {
         TripDao tripDao = new TripDao();
         SearchTripService searchTripService = new SearchTripService(tripDao);
         SaveTripService saveTripService = new SaveTripService(tripDao);
-        TripController tripController = new TripController(viewer, tripDao, searchTripService, saveTripService);
+        TripController tripController = new TripController(viewer, searchTripService, saveTripService);
 
         tripController.launch();
     }
