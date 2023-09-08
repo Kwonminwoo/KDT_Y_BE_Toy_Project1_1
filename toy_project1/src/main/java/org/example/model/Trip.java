@@ -1,21 +1,23 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trip {
-    private int tripId;
-    private String tripName;
-    private String startDate;
-    private String endDate;
-    private List<Itinerary> Itineraries = new ArrayList<>();
+import static org.example.util.constant.TripAttributeConstant.*;
 
-    public Trip(int tripId, String tripName, String startDate, String endDate) {
-        this.tripId = tripId;
-        this.tripName = tripName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+
+public class Trip {
+    @JsonProperty(TRIP_ID)
+    private int tripId;
+    @JsonProperty(TRIP_NAME)
+    private String tripName;
+    @JsonProperty(TRIP_START_DATE)
+    private String startDate;
+    @JsonProperty(TRIP_END_DATE)
+    private String endDate;
+    @JsonProperty(TRIP_ITINERARIES)
+    private List<Itinerary> Itineraries = new ArrayList<>();
 
     public Trip() {
     }
@@ -58,26 +60,5 @@ public class Trip {
 
     public void setItineraries(List<Itinerary> itineraries) {
         Itineraries = itineraries;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Trip ID: ").append(tripId).append("\n");
-        stringBuilder.append("Trip Name: ").append(tripName).append("\n");
-        stringBuilder.append("Start Date: ").append(startDate).append("\n");
-        stringBuilder.append("End Date: ").append(endDate).append("\n");
-
-        for (Itinerary itinerary : Itineraries) {
-            stringBuilder.append("Itinerary ID: ").append(itinerary.getItineraryId()).append("\n");
-            stringBuilder.append("Departure Place: ").append(itinerary.getDeparturePlace()).append("\n");
-            stringBuilder.append("Destination: ").append(itinerary.getDestination()).append("\n");
-            stringBuilder.append("Departure Time: ").append(itinerary.getDepartureTime()).append("\n");
-            stringBuilder.append("Arrival Time: ").append(itinerary.getArrivalTime()).append("\n");
-            stringBuilder.append("Check-In: ").append(itinerary.getCheckIn()).append("\n");
-            stringBuilder.append("Check-Out: ").append(itinerary.getCheckOut()).append("\n");
-        }
-
-        return stringBuilder.toString();
     }
 }

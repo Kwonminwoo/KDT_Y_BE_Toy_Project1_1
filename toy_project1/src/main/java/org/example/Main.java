@@ -1,11 +1,21 @@
 package org.example;
 
-import controller.Controller;
-import view.Viewer;
+import org.example.controller.TripController;
+import org.example.repository.TripDao;
+import org.example.service.SaveTripService;
+import org.example.service.SearchTripService;
+import org.example.view.Viewer;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Controller controller = new Controller();
-        controller.run();
+        Scanner scanner = new Scanner(System.in);
+        Viewer viewer = new Viewer(scanner);
+        TripDao tripDao = new TripDao();
+        SearchTripService searchTripService = new SearchTripService(tripDao);
+        SaveTripService saveTripService = new SaveTripService(tripDao);
+        TripController tripController = new TripController(viewer, tripDao, searchTripService, saveTripService);
+
+        tripController.launch();
     }
 }

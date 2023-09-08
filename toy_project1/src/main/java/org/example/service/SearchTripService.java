@@ -5,6 +5,8 @@ import org.example.repository.TripDao;
 
 import java.util.List;
 
+import static org.example.util.constant.FileNameConstant.*;
+
 public class SearchTripService {
     private final TripDao tripDao;
 
@@ -13,14 +15,13 @@ public class SearchTripService {
     }
 
     public List<Trip> getTripsAs(String fileFormat) {
-        if (".json".equals(fileFormat)) {
-            return tripDao.findTripsAsJsonFrom(); // TODO: Exception: Empty Exception
+        if (JSON_FILE_FORMAT_SUFFIX.equals(fileFormat)) {
+            return tripDao.findTripsAsJsonFrom();
         }
         return tripDao.findTripsAsCsvFrom();
     }
 
     public Trip getTripById(int tripId) {
-        // DAO
         Trip foundTrip = new Trip();
         List<Trip> trips = tripDao.findTripsAsJsonFrom();
         for (Trip trip : trips) {
