@@ -8,6 +8,7 @@ import org.example.model.Trip;
 import org.example.util.FileListLoader;
 import org.example.util.FolderLocator;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +82,8 @@ public class TripDao {
                 + ITINERARY_DEPARTURE_TIME + "," + ITINERARY_ARRIVAL_TIME + "," + ITINERARY_CHECK_IN + "," + ITINERARY_CHECK_OUT + "\n";
 
         String filename = FolderLocator.getPath() + FILENAME_PREFIX + "_" + trip.getTripId() + CSV_FILE_FORMAT_SUFFIX;
-        try(Writer writer = new OutputStreamWriter(new FileOutputStream(filename))) {
+        try(Writer writer = new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8)) {
+            writer.write("\uFEFF"); // csv 파일 저장시 한글 깨짐 방지
             writer.append(csvColumnName);
             for (Itinerary itinerary : trip.getItineraries()) {
                 writer.append(Integer.toString(trip.getTripId())).append(",")
@@ -104,7 +106,7 @@ public class TripDao {
     public void saveTripAsJSON(Trip trip) {
         ObjectMapper objectMapper = new ObjectMapper();
         String filename = FolderLocator.getPath() + FILENAME_PREFIX + "_" + trip.getTripId() + JSON_FILE_FORMAT_SUFFIX;
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filename))) {
+        try (Writer writer = new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8)) {
             objectMapper.writeValue(writer, trip);
         } catch (IOException e){
             e.printStackTrace();
