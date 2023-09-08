@@ -16,6 +16,9 @@ public class FileListLoader {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MATCHED_GROUP_INDEX = 1;
 
+    private FileListLoader() {
+    }
+
     public static List<File> getJsonFiles(String directoryPath) {
         fileFormat = JSON_FILE_FORMAT_SUFFIX;
         return getFiles(directoryPath);
@@ -86,7 +89,6 @@ public class FileListLoader {
                 numberOfLastFile = Integer.parseInt(matcherNumberOfLastFile.group());
             }
         }
-
         return numberOfLastFile;
     }
 }

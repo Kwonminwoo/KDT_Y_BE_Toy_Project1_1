@@ -15,4 +15,7 @@ public class FolderCreator {
             FileListLoader.getFilesFrom(FolderLocator.getPath());
         }
     }
+
+    private FolderCreator(){
+    }
 }
