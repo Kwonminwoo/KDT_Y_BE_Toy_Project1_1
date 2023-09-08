@@ -135,7 +135,10 @@
 
 ![서비스 종료-메인화면에서 종료.jpg](img%2F%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%A2%85%EB%A3%8C-%EB%A9%94%EC%9D%B8%ED%99%94%EB%A9%B4%EC%97%90%EC%84%9C%20%EC%A2%85%EB%A3%8C.jpg)
 
-
+---
+#### 파일 출력 결과
+![image](https://github.com/Kwonminwoo/KDT_Y_BE_Toy_Project1_1/assets/34360434/6ac8b553-149d-4d1f-897d-e4f7a8af3be8)
+![image](https://github.com/Kwonminwoo/KDT_Y_BE_Toy_Project1_1/assets/34360434/83475ca7-81ff-4855-aff6-502db2908b79)
 
 
 
