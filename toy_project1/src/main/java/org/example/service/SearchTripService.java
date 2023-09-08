@@ -3,6 +3,8 @@ package org.example.service;
 import org.example.model.Trip;
 import org.example.repository.TripDao;
 import java.util.List;
+import java.util.Optional;
+
 import static org.example.util.constant.FileNameConstant.*;
 
 public class SearchTripService {
@@ -19,12 +21,12 @@ public class SearchTripService {
         return tripDao.findTripsAsCsvFrom();
     }
 
-    public Trip getTripById(int tripId) {
-        Trip foundTrip = new Trip();
+    public Optional<Trip> getTripById(int tripId) {
+        Optional<Trip> foundTrip = Optional.empty();
         List<Trip> trips = tripDao.findTripsAsJsonFrom();
         for (Trip trip : trips) {
             if (trip.getTripId() == tripId) {
-                foundTrip = trip;
+                foundTrip = Optional.of(trip);
             }
         }
         return foundTrip;
