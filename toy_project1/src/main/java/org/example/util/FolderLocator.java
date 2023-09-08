@@ -8,8 +8,8 @@ public class FolderLocator {
     static final String OS_NAME = System.getProperty("os.name");
     static final String MAC_OS = "Mac OS X";
     static final String WINDOWS_OS = "Windows";
-    static final String RELATIVE_PATH_OF_MAC = "toy_project1/src/main/resources/";
-    static final String RELATIVE_PATH_OF_WINDOWS = "src/main/resources/";
+    static final String RELATIVE_PATH_OF_MAC = "toy_project1/.results/";
+    static final String RELATIVE_PATH_OF_WINDOWS = ".results/";
 
     public static String getPath() {
         Path filePath;

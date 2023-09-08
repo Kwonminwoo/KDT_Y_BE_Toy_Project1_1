@@ -43,7 +43,7 @@ public class FileListLoader {
         return files;
     }
 
-    private static File[] getFilesFrom(String directoryPath) {
+    public static File[] getFilesFrom(String directoryPath) {
         File directory = new File(directoryPath);
         return directory.listFiles();
     }
@@ -78,7 +78,6 @@ public class FileListLoader {
         }
 
         Pattern patternForExtractedNumber = Pattern.compile(PATTERN_TO_EXTRACT_NUMBER);
-        assert fileNames != null;
         int sizeOfFileNamesList = fileNames.size();
         int numberOfLastFile = 0;
         if (sizeOfFileNamesList >= MINIMUM_NUMBER) {
